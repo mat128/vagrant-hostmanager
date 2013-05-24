@@ -15,7 +15,11 @@ module VagrantPlugins
       end
 
       action_hook(:hostmanager, :machine_action_up) do |hook|
-        hook.prepend(Action::UpdateHostsFile)
+        if VagrantPlugins.const_defined?("OpenStack") && VagrantPlugins::OpenStack.const_defined?("Action")
+          hook.before(VagrantPlugins::OpenStack::Action::CreateServer, Action::UpdateHostsFile)
+        else
+          hook.prepend(Action::UpdateHostsFile)
+        end
       end
 
       action_hook(:hostmanager, :machine_action_destroy) do |hook|
