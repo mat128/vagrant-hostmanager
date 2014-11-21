@@ -1,3 +1,5 @@
+require 'vagrant-hostmanager/util'
+
 module VagrantPlugins
   module HostManager
     module HostsFile
@@ -71,7 +73,7 @@ module VagrantPlugins
       # Returns an array with the same structure as env.active_machines:
       # [ [:machine, :virtualbox], [:foo, :virtualbox] ]
       def get_machines(env, provider)
-        if env.config_global.hostmanager.include_offline?
+        if Util.get_config(env).hostmanager.include_offline?
           machines = []
           env.machine_names.each do |name|
             begin
