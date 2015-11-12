@@ -24,8 +24,16 @@ module VagrantPlugins
 
         generate(@env, options[:provider].to_sym)
 
-        with_target_vms(argv, options) do |machine|
-          update(machine)
+        if argv.length == 0
+          @env.active_machines.each do |active_name, active_provider|
+            puts active_name
+            machine = @env.machine(active_name, active_provider)
+            update(machine)
+          end
+        else
+          with_target_vms(argv, options) do |machine|
+            update(machine)
+          end
         end
       end
     end
