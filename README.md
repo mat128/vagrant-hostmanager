@@ -17,7 +17,7 @@ Installation
 ------------
 Install the plugin following the typical Vagrant 1.1 procedure:
 
-    $ vagrant plugin install vagrant-hostmanager
+    $ vagrant plugin install vagrant-hostmanager-lite
 
 Usage
 -----
