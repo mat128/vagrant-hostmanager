@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'vagrant-hostmanager/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'vagrant-hostmanager'
+  gem.name          = 'vagrant-hostmanager-lite'
   gem.version       = VagrantPlugins::HostManager::VERSION
   gem.authors       = ['Shawn Dahlen']
   gem.email         = ['shawn@dahlen.me']
