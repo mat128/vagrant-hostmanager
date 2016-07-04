@@ -1,4 +1,4 @@
-require 'vagrant-hostmanager/action/update_hosts_file'
+require 'vagrant-hostmanager-lite/action/update_hosts_file'
 
 module VagrantPlugins
   module HostManager

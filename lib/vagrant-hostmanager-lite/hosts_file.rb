@@ -1,4 +1,4 @@
-require 'vagrant-hostmanager/util'
+require 'vagrant-hostmanager-lite/util'
 
 module VagrantPlugins
   module HostManager

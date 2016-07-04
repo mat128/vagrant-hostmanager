@@ -1,6 +1,6 @@
-require 'vagrant-hostmanager/plugin'
-require 'vagrant-hostmanager/version'
-require 'vagrant-hostmanager/errors'
+require 'vagrant-hostmanager-lite/plugin'
+require 'vagrant-hostmanager-lite/version'
+require 'vagrant-hostmanager-lite/errors'
 
 module VagrantPlugins
   module HostManager
