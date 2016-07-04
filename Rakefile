@@ -11,3 +11,5 @@ task :test do
   sh 'test/test.sh'
   sh 'test/test_plugin_does_not_break_vagrant.sh'
 end
+
+task :default => "test"
