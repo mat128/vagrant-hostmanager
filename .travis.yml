@@ -4,3 +4,12 @@ rvm:
 
 script:
   - true # Integration tests cannot run on Travis... http://omerkatz.com/blog/2013/6/15/travis-ci-does-not-work-when-you-package-vagrant-boxes-as-a-build-step-yet
+
+deploy:
+  provider: rubygems
+  api_key:
+    secure: Q0yUnJypPr23nkoDhp3gfHzyvUYWOqdWWZJ+dqStDuU5TMVb+RTCAtx8m+K6pDcQRdHcqQYsdbGO7mbEGmSMkhGpzMNyRj7hyPID81JU3+NgMdjFmmfU7DijcdTwmNyAM/IoKfgc7qrCZ2ESZR+wVNXubM/lIIREddMcAD7X1zo=
+  gem: vagrant-hostmanager-lite
+  on:
+    tags: true
+    repo: mat128/vagrant-hostmanager
