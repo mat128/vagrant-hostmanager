@@ -25,8 +25,7 @@ module VagrantPlugins
         generate(@env, options[:provider].to_sym)
 
         if argv.length == 0
-          @env.active_machines.each do |active_name, active_provider|
-            puts active_name
+          Parallel.map(@env.active_machines) do |active_name, active_provider|
             machine = @env.machine(active_name, active_provider)
             update(machine)
           end
