@@ -1,4 +1,5 @@
 require 'vagrant-hostmanager-lite/util'
+require 'parallel'
 
 module VagrantPlugins
   module HostManager
@@ -28,24 +29,30 @@ module VagrantPlugins
           file << "\n"
 
           # add a hosts entry for each active machine matching the provider
-          get_machines(env, provider).each do |name, p|
+          semaphore = Mutex.new
+          Parallel.map(get_machines(env, provider)) do |name, p|
             if provider == p
-              machines << machine = env.machine(name, provider)
+              machine = env.machine(name, provider)
               host = machine.config.vm.hostname || name
               ip = get_ip_address.call(machine)
-              if ip
-                host_aliases = machine.config.hostmanager.aliases.join("\s").chomp
-                machine.env.ui.info I18n.t('vagrant_hostmanager.action.add_host', {
-                  :ip       => ip,
-                  :host     => host,
-                  :aliases  => host_aliases,
-                })
-                file << "#{ip}\t#{host}\s#{host_aliases}\n"
-              else
-                machine.env.ui.warn I18n.t('vagrant_hostmanager.action.host_no_ip', {
-                  :name => name,
-                })
-              end
+
+              semaphore.synchronize {
+                if ip
+                  host_aliases = machine.config.hostmanager.aliases.join("\s").chomp
+                  machines << machine
+                  file << "#{ip}\t#{host}\s#{host_aliases}\n"
+                  machine.env.ui.info I18n.t('vagrant_hostmanager.action.add_host', {
+                    :ip       => ip,
+                    :host     => host,
+                    :aliases  => host_aliases,
+                  })
+                else
+                  machine.env.ui.warn I18n.t('vagrant_hostmanager.action.host_no_ip', {
+                    :name => name,
+                  })
+                end
+              }
+              nil
             end
           end
         end
