@@ -11,6 +11,8 @@ Gem::Specification.new do |gem|
   gem.description   = %q{A Vagrant plugin that manages the /etc/hosts file within a multi-machine environment}
   gem.summary       = gem.description
 
+  gem.add_runtime_dependency "fog-core", "~> 1.43.0"
+
   gem.files         = `git ls-files`.split($/)
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']

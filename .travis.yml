@@ -1,6 +1,6 @@
 sudo: false
 rvm:
-  - 2.0.0
+  - 2.2.5
 
 script:
   - true # Integration tests cannot run on Travis... http://omerkatz.com/blog/2013/6/15/travis-ci-does-not-work-when-you-package-vagrant-boxes-as-a-build-step-yet
